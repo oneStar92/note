@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:note/domain/interface/use_cases/note_delete_use_case.dart';
 import 'package:note/domain/interface/use_cases/note_read_use_case.dart';
@@ -40,5 +42,9 @@ final class NoteListViewModel extends ChangeNotifier {
         error: (_) {},
       );
     }
+  }
+
+  String previewAt(int index) {
+    return _state.notes[index].content.substring(0, min(40, _state.notes[index].content.length));
   }
 }
