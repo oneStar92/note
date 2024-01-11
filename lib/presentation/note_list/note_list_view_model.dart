@@ -1,6 +1,5 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:note/domain/interface/use_cases/note_delete_use_case.dart';
 import 'package:note/domain/interface/use_cases/note_read_use_case.dart';
 import 'package:note/domain/model/note.dart';

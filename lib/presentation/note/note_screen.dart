@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:note/presentation/note/components/color_picker.dart';
 import 'package:note/presentation/note/components/save_button.dart';
 
