@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:note/common/result.dart';
 import 'package:note/domain/interface/use_cases/note_create_use_case.dart';
 import 'package:note/domain/interface/use_cases/note_update_use_case.dart';
-import 'package:note/domain/model/note.dart';
 import 'package:note/presentation/note/note_view_state.dart';
 
 final class NoteViewModel extends ChangeNotifier {
@@ -13,83 +12,51 @@ final class NoteViewModel extends ChangeNotifier {
   NoteViewModel({
     required NoteCreateUseCase createUseCase,
     required NoteUpdateUseCase updateUseCase,
+    required NoteViewState noteViewState,
   })  : _createUseCase = createUseCase,
         _updateUseCase = updateUseCase,
-        _state = const NoteViewState() {
-    _configure();
-  }
+        _state = noteViewState;
 
-  String get title => _state.title;
+  String get title => _state.note.title;
 
-  String get content => _state.content;
+  String get content => _state.note.content;
 
-  int get backgroundColor => _state.backGroundColor;
+  int get backgroundColor => _state.note.backgroundColor;
 
-  int get fontColor => _state.fontColor;
+  int get fontColor => _state.note.fontColor;
 
   set title(String value) {
-    _state = _state.copyWith(title: value);
+    _state = _state.copyWith(note: _state.note.copyWith(title: value));
     notifyListeners();
   }
 
   set content(String value) {
-    _state = _state.copyWith(content: value);
+    _state = _state.copyWith(note: _state.note.copyWith(content: value));
     notifyListeners();
   }
 
   set backgroundColor(int value) {
-    _state = _state.copyWith(backGroundColor: value);
+    _state = _state.copyWith(note: _state.note.copyWith(backgroundColor: value));
     notifyListeners();
   }
 
   set fontColor(int value) {
-    _state = _state.copyWith(fontColor: value);
+    _state = _state.copyWith(note: _state.note.copyWith(fontColor: value));
     notifyListeners();
   }
 
-  void _configure() {
-    final note = _state.note;
-    if (note != null) {
-      _state = _state.copyWith(
-        title: note.title,
-        content: note.content,
-        backGroundColor: note.backgroundColor,
-        fontColor: note.fontColor,
-      );
-      notifyListeners();
-    }
-  }
-
-  void save({required Function() onError, required Function() onComplete}) async {
-    if (_state.title.isEmpty || _state.content.isEmpty) {
-      onError;
+  Future<Result<void>> save() async {
+    if (_state.note.title.isEmpty || _state.note.content.isEmpty) {
+      return Result.error('제목과 내용을 적어주세요!!');
     } else {
       final Result<void> result;
-      Note? note = _state.note;
 
-      if (note != null) {
-        note = note.copyWith(
-          title: _state.title,
-          content: _state.content,
-          backgroundColor: _state.backGroundColor,
-          fontColor: _state.fontColor,
-        );
-        result = await _updateUseCase.execute(query: note);
+      if (_state.index != null) {
+        result = await _updateUseCase.execute(query: (index: _state.index!, note: _state.note));
       } else {
-        result = await _createUseCase.execute(
-          query: Note(
-            title: _state.title,
-            content: _state.content,
-            backgroundColor: _state.backGroundColor,
-            fontColor: _state.fontColor,
-          ),
-        );
+        result = await _createUseCase.execute(query: _state.note);
       }
-
-      result.when(
-        success: (_) => onComplete,
-        error: (_) => onError,
-      );
+      return result;
     }
   }
 }

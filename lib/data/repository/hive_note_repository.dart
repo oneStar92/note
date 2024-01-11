@@ -53,11 +53,11 @@ final class HiveNoteRepository implements NoteRepository {
   }
 
   @override
-  Future<Result<void>> update({required Note note}) async {
+  Future<Result<void>> update({required int index, required Note note}) async {
     final box = _box;
     if (box != null) {
       try {
-        return Result.success(await note.save());
+        return Result.success(await box.putAt(index, note));
       } catch (e) {
         return Result.error(e.toString());
       }

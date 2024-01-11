@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note/di/view_model_provider.dart';
 import 'package:note/presentation/note_list/components/note_list_item.dart';
 import 'package:note/presentation/note_list/note_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +17,14 @@ final class NoteListView extends StatelessWidget {
               height: 80,
               width: double.infinity,
               child: NoteListItem(
-                onClick: () {
-                  // push detail
+                onClick: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => getNoteViewModelProvider(index: index, note: viewModel.notes[index]),
+                    ),
+                  );
+                  context.read<NoteListViewModel>().readAll();
                 },
                 onDelete: () {
                   viewModel.deleteAt(index);
@@ -37,7 +44,7 @@ final class NoteListView extends StatelessWidget {
           },
           itemCount: viewModel.notes.length,
         );
-      }
+      },
     );
   }
 }

@@ -16,11 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NoteViewState {
-  Note? get note => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
-  int get backGroundColor => throw _privateConstructorUsedError;
-  int get fontColor => throw _privateConstructorUsedError;
+  Note get note => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteViewStateCopyWith<NoteViewState> get copyWith =>
@@ -33,14 +30,9 @@ abstract class $NoteViewStateCopyWith<$Res> {
           NoteViewState value, $Res Function(NoteViewState) then) =
       _$NoteViewStateCopyWithImpl<$Res, NoteViewState>;
   @useResult
-  $Res call(
-      {Note? note,
-      String title,
-      String content,
-      int backGroundColor,
-      int fontColor});
+  $Res call({Note note, int? index});
 
-  $NoteCopyWith<$Res>? get note;
+  $NoteCopyWith<$Res> get note;
 }
 
 /// @nodoc
@@ -56,44 +48,25 @@ class _$NoteViewStateCopyWithImpl<$Res, $Val extends NoteViewState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? note = freezed,
-    Object? title = null,
-    Object? content = null,
-    Object? backGroundColor = null,
-    Object? fontColor = null,
+    Object? note = null,
+    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
-      note: freezed == note
+      note: null == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
-              as Note?,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      backGroundColor: null == backGroundColor
-          ? _value.backGroundColor
-          : backGroundColor // ignore: cast_nullable_to_non_nullable
-              as int,
-      fontColor: null == fontColor
-          ? _value.fontColor
-          : fontColor // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Note,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NoteCopyWith<$Res>? get note {
-    if (_value.note == null) {
-      return null;
-    }
-
-    return $NoteCopyWith<$Res>(_value.note!, (value) {
+  $NoteCopyWith<$Res> get note {
+    return $NoteCopyWith<$Res>(_value.note, (value) {
       return _then(_value.copyWith(note: value) as $Val);
     });
   }
@@ -107,15 +80,10 @@ abstract class _$$NoteViewStateImplCopyWith<$Res>
       __$$NoteViewStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Note? note,
-      String title,
-      String content,
-      int backGroundColor,
-      int fontColor});
+  $Res call({Note note, int? index});
 
   @override
-  $NoteCopyWith<$Res>? get note;
+  $NoteCopyWith<$Res> get note;
 }
 
 /// @nodoc
@@ -129,33 +97,18 @@ class __$$NoteViewStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? note = freezed,
-    Object? title = null,
-    Object? content = null,
-    Object? backGroundColor = null,
-    Object? fontColor = null,
+    Object? note = null,
+    Object? index = freezed,
   }) {
     return _then(_$NoteViewStateImpl(
-      note: freezed == note
+      note: null == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
-              as Note?,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      backGroundColor: null == backGroundColor
-          ? _value.backGroundColor
-          : backGroundColor // ignore: cast_nullable_to_non_nullable
-              as int,
-      fontColor: null == fontColor
-          ? _value.fontColor
-          : fontColor // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Note,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -165,31 +118,16 @@ class __$$NoteViewStateImplCopyWithImpl<$Res>
 class _$NoteViewStateImpl
     with DiagnosticableTreeMixin
     implements _NoteViewState {
-  const _$NoteViewStateImpl(
-      {this.note,
-      this.title = '',
-      this.content = '',
-      this.backGroundColor = 0xFF000000,
-      this.fontColor = 0xFFFFFFFF});
+  const _$NoteViewStateImpl({required this.note, this.index});
 
   @override
-  final Note? note;
+  final Note note;
   @override
-  @JsonKey()
-  final String title;
-  @override
-  @JsonKey()
-  final String content;
-  @override
-  @JsonKey()
-  final int backGroundColor;
-  @override
-  @JsonKey()
-  final int fontColor;
+  final int? index;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteViewState(note: $note, title: $title, content: $content, backGroundColor: $backGroundColor, fontColor: $fontColor)';
+    return 'NoteViewState(note: $note, index: $index)';
   }
 
   @override
@@ -198,10 +136,7 @@ class _$NoteViewStateImpl
     properties
       ..add(DiagnosticsProperty('type', 'NoteViewState'))
       ..add(DiagnosticsProperty('note', note))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('backGroundColor', backGroundColor))
-      ..add(DiagnosticsProperty('fontColor', fontColor));
+      ..add(DiagnosticsProperty('index', index));
   }
 
   @override
@@ -210,17 +145,11 @@ class _$NoteViewStateImpl
         (other.runtimeType == runtimeType &&
             other is _$NoteViewStateImpl &&
             (identical(other.note, note) || other.note == note) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.content, content) || other.content == content) &&
-            (identical(other.backGroundColor, backGroundColor) ||
-                other.backGroundColor == backGroundColor) &&
-            (identical(other.fontColor, fontColor) ||
-                other.fontColor == fontColor));
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, note, title, content, backGroundColor, fontColor);
+  int get hashCode => Object.hash(runtimeType, note, index);
 
   @JsonKey(ignore: true)
   @override
@@ -230,23 +159,13 @@ class _$NoteViewStateImpl
 }
 
 abstract class _NoteViewState implements NoteViewState {
-  const factory _NoteViewState(
-      {final Note? note,
-      final String title,
-      final String content,
-      final int backGroundColor,
-      final int fontColor}) = _$NoteViewStateImpl;
+  const factory _NoteViewState({required final Note note, final int? index}) =
+      _$NoteViewStateImpl;
 
   @override
-  Note? get note;
+  Note get note;
   @override
-  String get title;
-  @override
-  String get content;
-  @override
-  int get backGroundColor;
-  @override
-  int get fontColor;
+  int? get index;
   @override
   @JsonKey(ignore: true)
   _$$NoteViewStateImplCopyWith<_$NoteViewStateImpl> get copyWith =>
