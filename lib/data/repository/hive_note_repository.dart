@@ -10,7 +10,7 @@ final class HiveNoteRepository implements NoteRepository {
 
   Box<Note>? _box;
 
-  void configureBox() async {
+  Future<void> configureBox() async {
     _box = await Hive.openBox<Note>('note');
   }
 
