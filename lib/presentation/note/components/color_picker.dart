@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-final class ColorPickerView extends StatefulWidget {
-  const ColorPickerView({super.key});
+final class ColorPickerView extends StatelessWidget {
+  final String _title;
+  final Color _color;
+  final Color _fontColor;
+  final Function(Color color) onPickedColor;
 
-  @override
-  State<ColorPickerView> createState() => _ColorPickerViewState();
-}
-
-class _ColorPickerViewState extends State<ColorPickerView> {
-  Color _color = Colors.white;
+  const ColorPickerView({
+    super.key,
+    required this.onPickedColor,
+    required String title,
+    required Color color,
+    required Color fontColor,
+  })  : _title = title,
+        _color = color,
+        _fontColor = fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +23,10 @@ class _ColorPickerViewState extends State<ColorPickerView> {
       children: [
         Expanded(
           child: Text(
-            '배경',
+            _title,
             style: TextStyle(
               fontSize: 24,
-              color: Colors.amber,
+              color: _fontColor,
             ),
           ),
         ),
@@ -35,11 +41,7 @@ class _ColorPickerViewState extends State<ColorPickerView> {
                   content: SingleChildScrollView(
                     child: ColorPicker(
                       pickerColor: _color,
-                      onColorChanged: (Color value) {
-                        setState(() {
-                          _color = value;
-                        });
-                      },
+                      onColorChanged: onPickedColor,
                       colorPickerWidth: 300,
                       pickerAreaHeightPercent: 0.7,
                       enableAlpha: true,
@@ -57,7 +59,11 @@ class _ColorPickerViewState extends State<ColorPickerView> {
           child: Container(
             height: 30,
             width: 30,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: _color),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: _color,
+              border: Border.all(color: _color == Colors.black ? Colors.white : Colors.black),
+            ),
           ),
         ),
       ],
