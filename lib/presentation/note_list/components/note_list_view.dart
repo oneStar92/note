@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:note/presentation/note_list/components/note_list_item.dart';
+import 'package:note/presentation/note_list/note_list_view_model.dart';
+import 'package:provider/provider.dart';
 
 final class NoteListView extends StatelessWidget {
   const NoteListView({super.key});
@@ -12,11 +14,16 @@ final class NoteListView extends StatelessWidget {
           height: 80,
           width: double.infinity,
           child: NoteListItem(
-            onDelete: () {},
-            title: 'Note Title',
-            preview: 'Note Preview',
-            backgroundColor: Colors.indigo,
-            fontColor: Colors.amber,
+            onClick: () {
+              // push detail
+            },
+            onDelete: () {
+              context.read<NoteListViewModel>().deleteAt(index);
+            },
+            title: context.read<NoteListViewModel>().notes[index].title,
+            preview: context.read<NoteListViewModel>().previewAt(index),
+            backgroundColor: Color(context.read<NoteListViewModel>().notes[index].hexColor),
+            fontColor: Color(context.read<NoteListViewModel>().notes[index].hexFontColor),
           ),
         );
       },
@@ -26,7 +33,7 @@ final class NoteListView extends StatelessWidget {
           height: 8.0,
         );
       },
-      itemCount: 10,
+      itemCount: context.read<NoteListViewModel>().notes.length,
     );
   }
 }
