@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:note/presentation/note/components/color_picker.dart';
 import 'package:note/presentation/note/components/save_button.dart';
 import 'package:note/presentation/note/note_view_model.dart';
-import 'package:note/presentation/note_list/note_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 final class NoteScreen extends StatelessWidget {
@@ -42,10 +41,7 @@ final class NoteScreen extends StatelessWidget {
                             height: 40,
                             width: 100,
                             child: ColorPickerView(
-                              onPickedColor: (Color color) {
-                                print(color);
-                                viewModel.backgroundColor = color.value;
-                              },
+                              onPickedColor: (Color color) => viewModel.backgroundColor = color.value,
                               title: '배경',
                               color: Color(viewModel.backgroundColor),
                               fontColor: Color(viewModel.fontColor),
@@ -127,12 +123,12 @@ final class NoteScreen extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                               e,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
                               ),
                             ),
-                            duration: Duration(seconds: 1),
+                            duration: const Duration(seconds: 1),
                           ));
                         },
                       );

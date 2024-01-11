@@ -47,7 +47,7 @@ final class NoteViewModel extends ChangeNotifier {
 
   Future<Result<void>> save() async {
     if (_state.note.title.isEmpty || _state.note.content.isEmpty) {
-      return Result.error('제목과 내용을 적어주세요!!');
+      return const Result.error('제목과 내용을 적어주세요!!');
     } else {
       final Result<void> result;
 
