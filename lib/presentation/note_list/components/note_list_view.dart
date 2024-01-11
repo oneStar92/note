@@ -22,8 +22,8 @@ final class NoteListView extends StatelessWidget {
             },
             title: context.read<NoteListViewModel>().notes[index].title,
             preview: context.read<NoteListViewModel>().previewAt(index),
-            backgroundColor: Color(context.read<NoteListViewModel>().notes[index].hexColor),
-            fontColor: Color(context.read<NoteListViewModel>().notes[index].hexFontColor),
+            backgroundColor: Color(context.read<NoteListViewModel>().notes[index].backgroundColor),
+            fontColor: Color(context.read<NoteListViewModel>().notes[index].fontColor),
           ),
         );
       },
