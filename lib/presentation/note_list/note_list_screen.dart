@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:note/presentation/note_list/components/add_button.dart';
 import 'package:note/presentation/note_list/components/note_list_view.dart';
 
-class NoteListScreen extends StatelessWidget {
+final class NoteListScreen extends StatelessWidget {
   const NoteListScreen({super.key});
 
   @override
