@@ -17,15 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Note {
   @HiveField(0)
-  String get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
-  @HiveField(2)
+  @HiveField(1)
   String get content => throw _privateConstructorUsedError;
+  @HiveField(2)
+  int get backgroundColor => throw _privateConstructorUsedError;
   @HiveField(3)
-  int get hexColor => throw _privateConstructorUsedError;
-  @HiveField(4)
-  int get hexFontColor => throw _privateConstructorUsedError;
+  int get fontColor => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteCopyWith<Note> get copyWith => throw _privateConstructorUsedError;
@@ -37,11 +35,10 @@ abstract class $NoteCopyWith<$Res> {
       _$NoteCopyWithImpl<$Res, Note>;
   @useResult
   $Res call(
-      {@HiveField(0) String id,
-      @HiveField(1) String title,
-      @HiveField(2) String content,
-      @HiveField(3) int hexColor,
-      @HiveField(4) int hexFontColor});
+      {@HiveField(0) String title,
+      @HiveField(1) String content,
+      @HiveField(2) int backgroundColor,
+      @HiveField(3) int fontColor});
 }
 
 /// @nodoc
@@ -57,17 +54,12 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? hexColor = null,
-    Object? hexFontColor = null,
+    Object? backgroundColor = null,
+    Object? fontColor = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -76,13 +68,13 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      hexColor: null == hexColor
-          ? _value.hexColor
-          : hexColor // ignore: cast_nullable_to_non_nullable
+      backgroundColor: null == backgroundColor
+          ? _value.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
               as int,
-      hexFontColor: null == hexFontColor
-          ? _value.hexFontColor
-          : hexFontColor // ignore: cast_nullable_to_non_nullable
+      fontColor: null == fontColor
+          ? _value.fontColor
+          : fontColor // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -96,11 +88,10 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) String id,
-      @HiveField(1) String title,
-      @HiveField(2) String content,
-      @HiveField(3) int hexColor,
-      @HiveField(4) int hexFontColor});
+      {@HiveField(0) String title,
+      @HiveField(1) String content,
+      @HiveField(2) int backgroundColor,
+      @HiveField(3) int fontColor});
 }
 
 /// @nodoc
@@ -113,17 +104,12 @@ class __$$NoteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? hexColor = null,
-    Object? hexFontColor = null,
+    Object? backgroundColor = null,
+    Object? fontColor = null,
   }) {
     return _then(_$NoteImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -132,13 +118,13 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      hexColor: null == hexColor
-          ? _value.hexColor
-          : hexColor // ignore: cast_nullable_to_non_nullable
+      backgroundColor: null == backgroundColor
+          ? _value.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
               as int,
-      hexFontColor: null == hexFontColor
-          ? _value.hexFontColor
-          : hexFontColor // ignore: cast_nullable_to_non_nullable
+      fontColor: null == fontColor
+          ? _value.fontColor
+          : fontColor // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -149,32 +135,28 @@ class __$$NoteImplCopyWithImpl<$Res>
 @HiveType(typeId: 0)
 class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
   _$NoteImpl(
-      {@HiveField(0) required this.id,
-      @HiveField(1) required this.title,
-      @HiveField(2) required this.content,
-      @HiveField(3) required this.hexColor,
-      @HiveField(4) required this.hexFontColor})
+      {@HiveField(0) required this.title,
+      @HiveField(1) required this.content,
+      @HiveField(2) required this.backgroundColor,
+      @HiveField(3) required this.fontColor})
       : super._();
 
   @override
   @HiveField(0)
-  final String id;
-  @override
-  @HiveField(1)
   final String title;
   @override
-  @HiveField(2)
+  @HiveField(1)
   final String content;
   @override
-  @HiveField(3)
-  final int hexColor;
+  @HiveField(2)
+  final int backgroundColor;
   @override
-  @HiveField(4)
-  final int hexFontColor;
+  @HiveField(3)
+  final int fontColor;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Note(id: $id, title: $title, content: $content, hexColor: $hexColor, hexFontColor: $hexFontColor)';
+    return 'Note(title: $title, content: $content, backgroundColor: $backgroundColor, fontColor: $fontColor)';
   }
 
   @override
@@ -182,11 +164,10 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Note'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('hexColor', hexColor))
-      ..add(DiagnosticsProperty('hexFontColor', hexFontColor));
+      ..add(DiagnosticsProperty('backgroundColor', backgroundColor))
+      ..add(DiagnosticsProperty('fontColor', fontColor));
   }
 
   @override
@@ -194,18 +175,17 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.hexColor, hexColor) ||
-                other.hexColor == hexColor) &&
-            (identical(other.hexFontColor, hexFontColor) ||
-                other.hexFontColor == hexFontColor));
+            (identical(other.backgroundColor, backgroundColor) ||
+                other.backgroundColor == backgroundColor) &&
+            (identical(other.fontColor, fontColor) ||
+                other.fontColor == fontColor));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, content, hexColor, hexFontColor);
+      Object.hash(runtimeType, title, content, backgroundColor, fontColor);
 
   @JsonKey(ignore: true)
   @override
@@ -216,28 +196,24 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
 
 abstract class _Note extends Note {
   factory _Note(
-      {@HiveField(0) required final String id,
-      @HiveField(1) required final String title,
-      @HiveField(2) required final String content,
-      @HiveField(3) required final int hexColor,
-      @HiveField(4) required final int hexFontColor}) = _$NoteImpl;
+      {@HiveField(0) required final String title,
+      @HiveField(1) required final String content,
+      @HiveField(2) required final int backgroundColor,
+      @HiveField(3) required final int fontColor}) = _$NoteImpl;
   _Note._() : super._();
 
   @override
   @HiveField(0)
-  String get id;
-  @override
-  @HiveField(1)
   String get title;
   @override
-  @HiveField(2)
+  @HiveField(1)
   String get content;
   @override
-  @HiveField(3)
-  int get hexColor;
+  @HiveField(2)
+  int get backgroundColor;
   @override
-  @HiveField(4)
-  int get hexFontColor;
+  @HiveField(3)
+  int get fontColor;
   @override
   @JsonKey(ignore: true)
   _$$NoteImplCopyWith<_$NoteImpl> get copyWith =>

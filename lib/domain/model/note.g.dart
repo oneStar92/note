@@ -17,28 +17,25 @@ class NoteImplAdapter extends TypeAdapter<_$NoteImpl> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$NoteImpl(
-      id: fields[0] as String,
-      title: fields[1] as String,
-      content: fields[2] as String,
-      hexColor: fields[3] as int,
-      hexFontColor: fields[4] as int,
+      title: fields[0] as String,
+      content: fields[1] as String,
+      backgroundColor: fields[2] as int,
+      fontColor: fields[3] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$NoteImpl obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.content)
-      ..writeByte(3)
-      ..write(obj.hexColor)
       ..writeByte(4)
-      ..write(obj.hexFontColor);
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.content)
+      ..writeByte(2)
+      ..write(obj.backgroundColor)
+      ..writeByte(3)
+      ..write(obj.fontColor);
   }
 
   @override

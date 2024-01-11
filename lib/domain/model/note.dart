@@ -12,10 +12,9 @@ class Note extends HiveObject with _$Note {
 
   @HiveType(typeId: 0)
   factory Note({
-  @HiveField(0) required String id,
-  @HiveField(1) required String title,
-  @HiveField(2) required String content,
-  @HiveField(3) required int hexColor,
-  @HiveField(4) required int hexFontColor,
+  @HiveField(0) required String title,
+  @HiveField(1) required String content,
+  @HiveField(2) required int backgroundColor,
+  @HiveField(3) required int fontColor,
   }) = _Note;
 }
