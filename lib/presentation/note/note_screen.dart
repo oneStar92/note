@@ -33,7 +33,7 @@ final class NoteScreen extends StatelessWidget {
                               child: ColorPickerView(
                                 onPickedColor: (Color color) {
                                   print(color);
-                                  context.read<NoteViewModel>().backgroundColor = color.value;
+                                  viewModel.backgroundColor = color.value;
                                 },
                                 title: '배경',
                                 color: Color(viewModel.backgroundColor),
@@ -47,7 +47,7 @@ final class NoteScreen extends StatelessWidget {
                               height: 40,
                               width: 100,
                               child: ColorPickerView(
-                                onPickedColor: (Color color) => context.read<NoteViewModel>().fontColor = color.value,
+                                onPickedColor: (Color color) => viewModel.fontColor = color.value,
                                 title: '폰트',
                                 color: Color(viewModel.fontColor),
                                 fontColor: Color(viewModel.fontColor),
@@ -60,7 +60,7 @@ final class NoteScreen extends StatelessWidget {
                           controller: TextEditingController(text: viewModel.title),
                           style: TextStyle(
                             fontSize: 24,
-                            color: Color(context.read<NoteViewModel>().fontColor),
+                            color: Color(viewModel.fontColor),
                           ),
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
@@ -69,11 +69,11 @@ final class NoteScreen extends StatelessWidget {
                             hintText: '제목을 입력하세요...',
                             hintStyle: TextStyle(
                               fontSize: 24,
-                              color: Color(context.read<NoteViewModel>().fontColor).withOpacity(0.5),
+                              color: Color(viewModel.fontColor).withOpacity(0.5),
                             ),
                           ),
                           onChanged: (value) {
-                            context.read<NoteViewModel>().title = value;
+                            viewModel.title = value;
                           },
                         ),
                         Expanded(
@@ -81,7 +81,7 @@ final class NoteScreen extends StatelessWidget {
                             controller: TextEditingController(text: viewModel.content),
                             style: TextStyle(
                               fontSize: 16,
-                              color: Color(context.read<NoteViewModel>().fontColor),
+                              color: Color(viewModel.fontColor),
                             ),
                             textAlign: TextAlign.left,
                             decoration: InputDecoration(
@@ -90,11 +90,11 @@ final class NoteScreen extends StatelessWidget {
                               hintText: '내용을 입력하세요...',
                               hintStyle: TextStyle(
                                 fontSize: 16,
-                                color: Color(context.read<NoteViewModel>().fontColor).withOpacity(0.5),
+                                color: Color(viewModel.fontColor).withOpacity(0.5),
                               ),
                             ),
                             onChanged: (value) {
-                              context.read<NoteViewModel>().content = value;
+                              viewModel.content = value;
                             },
                           ),
                         ),
