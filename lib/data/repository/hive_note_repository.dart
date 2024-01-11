@@ -4,13 +4,13 @@ import 'package:note/domain/model/note.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 final class HiveNoteRepository implements NoteRepository {
+  static final HiveNoteRepository shared = HiveNoteRepository._();
+
+  HiveNoteRepository._();
+
   Box<Note>? _box;
 
-  HiveNoteRepository() {
-    _configure();
-  }
-
-  void _configure() async {
+  void configureBox() async {
     _box = await Hive.openBox<Note>('note');
   }
 
