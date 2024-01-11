@@ -8,32 +8,36 @@ final class NoteListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) {
-        return SizedBox(
-          height: 80,
-          width: double.infinity,
-          child: NoteListItem(
-            onClick: () {
-              // push detail
-            },
-            onDelete: () {
-              context.read<NoteListViewModel>().deleteAt(index);
-            },
-            title: context.read<NoteListViewModel>().notes[index].title,
-            preview: context.read<NoteListViewModel>().previewAt(index),
-            backgroundColor: Color(context.read<NoteListViewModel>().notes[index].backgroundColor),
-            fontColor: Color(context.read<NoteListViewModel>().notes[index].fontColor),
-          ),
+    return Consumer<NoteListViewModel>(
+      builder: (context, viewModel, child) {
+        return ListView.separated(
+          itemBuilder: (context, index) {
+            return SizedBox(
+              height: 80,
+              width: double.infinity,
+              child: NoteListItem(
+                onClick: () {
+                  // push detail
+                },
+                onDelete: () {
+                  viewModel.deleteAt(index);
+                },
+                title: viewModel.notes[index].title,
+                preview: viewModel.previewAt(index),
+                backgroundColor: Color(viewModel.notes[index].backgroundColor),
+                fontColor: Color(viewModel.notes[index].fontColor),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const Divider(
+              color: Colors.transparent,
+              height: 8.0,
+            );
+          },
+          itemCount: viewModel.notes.length,
         );
-      },
-      separatorBuilder: (context, index) {
-        return const Divider(
-          color: Colors.transparent,
-          height: 8.0,
-        );
-      },
-      itemCount: context.read<NoteListViewModel>().notes.length,
+      }
     );
   }
 }
