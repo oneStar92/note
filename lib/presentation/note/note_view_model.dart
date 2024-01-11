@@ -13,10 +13,9 @@ final class NoteViewModel extends ChangeNotifier {
   NoteViewModel({
     required NoteCreateUseCase createUseCase,
     required NoteUpdateUseCase updateUseCase,
-    required NoteViewState state,
   })  : _createUseCase = createUseCase,
         _updateUseCase = updateUseCase,
-        _state = state {
+        _state = const NoteViewState() {
     _configure();
   }
 
