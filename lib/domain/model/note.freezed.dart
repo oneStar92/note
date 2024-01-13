@@ -16,147 +16,46 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Note {
-  @HiveField(0)
+  int? get primaryKey => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get content => throw _privateConstructorUsedError;
-  @HiveField(2)
   int get backgroundColor => throw _privateConstructorUsedError;
-  @HiveField(3)
   int get fontColor => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $NoteCopyWith<Note> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NoteCopyWith<$Res> {
-  factory $NoteCopyWith(Note value, $Res Function(Note) then) =
-      _$NoteCopyWithImpl<$Res, Note>;
-  @useResult
-  $Res call(
-      {@HiveField(0) String title,
-      @HiveField(1) String content,
-      @HiveField(2) int backgroundColor,
-      @HiveField(3) int fontColor});
-}
-
-/// @nodoc
-class _$NoteCopyWithImpl<$Res, $Val extends Note>
-    implements $NoteCopyWith<$Res> {
-  _$NoteCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = null,
-    Object? content = null,
-    Object? backgroundColor = null,
-    Object? fontColor = null,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      backgroundColor: null == backgroundColor
-          ? _value.backgroundColor
-          : backgroundColor // ignore: cast_nullable_to_non_nullable
-              as int,
-      fontColor: null == fontColor
-          ? _value.fontColor
-          : fontColor // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
-  factory _$$NoteImplCopyWith(
-          _$NoteImpl value, $Res Function(_$NoteImpl) then) =
-      __$$NoteImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@HiveField(0) String title,
-      @HiveField(1) String content,
-      @HiveField(2) int backgroundColor,
-      @HiveField(3) int fontColor});
-}
-
-/// @nodoc
-class __$$NoteImplCopyWithImpl<$Res>
-    extends _$NoteCopyWithImpl<$Res, _$NoteImpl>
-    implements _$$NoteImplCopyWith<$Res> {
-  __$$NoteImplCopyWithImpl(_$NoteImpl _value, $Res Function(_$NoteImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = null,
-    Object? content = null,
-    Object? backgroundColor = null,
-    Object? fontColor = null,
-  }) {
-    return _then(_$NoteImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      backgroundColor: null == backgroundColor
-          ? _value.backgroundColor
-          : backgroundColor // ignore: cast_nullable_to_non_nullable
-              as int,
-      fontColor: null == fontColor
-          ? _value.fontColor
-          : fontColor // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+  DateTime? get updateDate => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 
-@HiveType(typeId: 0)
 class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
   _$NoteImpl(
-      {@HiveField(0) required this.title,
-      @HiveField(1) required this.content,
-      @HiveField(2) required this.backgroundColor,
-      @HiveField(3) required this.fontColor})
+      {this.primaryKey,
+      this.title = '',
+      this.content = '',
+      this.backgroundColor = 0xFF000000,
+      this.fontColor = 0xFFFFFFFF,
+      this.updateDate})
       : super._();
 
   @override
-  @HiveField(0)
+  final int? primaryKey;
+  @override
+  @JsonKey()
   final String title;
   @override
-  @HiveField(1)
+  @JsonKey()
   final String content;
   @override
-  @HiveField(2)
+  @JsonKey()
   final int backgroundColor;
   @override
-  @HiveField(3)
+  @JsonKey()
   final int fontColor;
+  @override
+  final DateTime? updateDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Note(title: $title, content: $content, backgroundColor: $backgroundColor, fontColor: $fontColor)';
+    return 'Note(primaryKey: $primaryKey, title: $title, content: $content, backgroundColor: $backgroundColor, fontColor: $fontColor, updateDate: $updateDate)';
   }
 
   @override
@@ -164,10 +63,12 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Note'))
+      ..add(DiagnosticsProperty('primaryKey', primaryKey))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('backgroundColor', backgroundColor))
-      ..add(DiagnosticsProperty('fontColor', fontColor));
+      ..add(DiagnosticsProperty('fontColor', fontColor))
+      ..add(DiagnosticsProperty('updateDate', updateDate));
   }
 
   @override
@@ -175,47 +76,43 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteImpl &&
+            (identical(other.primaryKey, primaryKey) ||
+                other.primaryKey == primaryKey) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.backgroundColor, backgroundColor) ||
                 other.backgroundColor == backgroundColor) &&
             (identical(other.fontColor, fontColor) ||
-                other.fontColor == fontColor));
+                other.fontColor == fontColor) &&
+            (identical(other.updateDate, updateDate) ||
+                other.updateDate == updateDate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, content, backgroundColor, fontColor);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$NoteImplCopyWith<_$NoteImpl> get copyWith =>
-      __$$NoteImplCopyWithImpl<_$NoteImpl>(this, _$identity);
+  int get hashCode => Object.hash(runtimeType, primaryKey, title, content,
+      backgroundColor, fontColor, updateDate);
 }
 
 abstract class _Note extends Note {
   factory _Note(
-      {@HiveField(0) required final String title,
-      @HiveField(1) required final String content,
-      @HiveField(2) required final int backgroundColor,
-      @HiveField(3) required final int fontColor}) = _$NoteImpl;
+      {final int? primaryKey,
+      final String title,
+      final String content,
+      final int backgroundColor,
+      final int fontColor,
+      final DateTime? updateDate}) = _$NoteImpl;
   _Note._() : super._();
 
   @override
-  @HiveField(0)
+  int? get primaryKey;
+  @override
   String get title;
   @override
-  @HiveField(1)
   String get content;
   @override
-  @HiveField(2)
   int get backgroundColor;
   @override
-  @HiveField(3)
   int get fontColor;
   @override
-  @JsonKey(ignore: true)
-  _$$NoteImplCopyWith<_$NoteImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  DateTime? get updateDate;
 }
