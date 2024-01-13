@@ -1,21 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:note/common/result.dart';
-import 'package:note/domain/interface/use_cases/note_create_use_case.dart';
-import 'package:note/domain/interface/use_cases/note_update_use_case.dart';
+import 'package:note/domain/interface/use_cases/note_save_use_case.dart';
 import 'package:note/presentation/note/note_view_state.dart';
 
 final class NoteViewModel extends ChangeNotifier {
-  final NoteCreateUseCase _createUseCase;
-  final NoteUpdateUseCase _updateUseCase;
+  final NoteSaveUseCase _saveUseCase;
   NoteViewState _state;
 
   NoteViewModel({
-    required NoteCreateUseCase createUseCase,
-    required NoteUpdateUseCase updateUseCase,
     required NoteViewState noteViewState,
-  })  : _createUseCase = createUseCase,
-        _updateUseCase = updateUseCase,
-        _state = noteViewState;
+    required NoteSaveUseCase noteSaveUseCase,
+  })  : _state = noteViewState,
+        _saveUseCase = noteSaveUseCase;
 
   String get title => _state.note.title;
 
@@ -49,14 +45,11 @@ final class NoteViewModel extends ChangeNotifier {
     if (_state.note.title.isEmpty || _state.note.content.isEmpty) {
       return const Result.error('제목과 내용을 적어주세요!!');
     } else {
-      final Result<void> result;
-
-      if (_state.note.primaryKey != null) {
-        result = await _updateUseCase.execute(query: _state.note);
-      } else {
-        result = await _createUseCase.execute(query: _state.note);
-      }
-      return result;
+      final result = await _saveUseCase.execute(query: _state.note);
+      return result.map(
+        success: (value) => const Result.success(()),
+        error: (_) => const Result.error('저장에 실패했습니다.'),
+      );
     }
   }
 }
