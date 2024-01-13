@@ -51,8 +51,8 @@ final class NoteViewModel extends ChangeNotifier {
     } else {
       final Result<void> result;
 
-      if (_state.index != null) {
-        result = await _updateUseCase.execute(query: (index: _state.index!, note: _state.note));
+      if (_state.note.primaryKey != null) {
+        result = await _updateUseCase.execute(query: _state.note);
       } else {
         result = await _createUseCase.execute(query: _state.note);
       }
