@@ -1,27 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:note/presentation/note/components/color_picker.dart';
+import 'package:note/presentation/note/components/content_text_form_field.dart';
 import 'package:note/presentation/note/components/save_button.dart';
+import 'package:note/presentation/note/components/title_text_form_field.dart';
 import 'package:note/presentation/note/note_view_model.dart';
 import 'package:provider/provider.dart';
 
-final class NoteScreen extends StatelessWidget {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _contentController = TextEditingController();
+final class NoteScreen extends StatefulWidget {
+  const NoteScreen({super.key});
 
-  NoteScreen({super.key});
+  @override
+  State<NoteScreen> createState() => _NoteScreenState();
+}
+
+class _NoteScreenState extends State<NoteScreen> {
+  late final TextEditingController _titleController;
+  late final TextEditingController _contentController;
+
+  @override
+  void initState() {
+    _titleController = TextEditingController(text: context.read<NoteViewModel>().title);
+    _contentController = TextEditingController(text: context.read<NoteViewModel>().content);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _titleController = TextEditingController(text: context.read<NoteViewModel>().title);
-    _contentController = TextEditingController(text: context.read<NoteViewModel>().content);
     return Consumer<NoteViewModel>(builder: (context, viewModel, child) {
       return Scaffold(
         backgroundColor: Color(viewModel.backgroundColor),
         appBar: AppBar(
           iconTheme: IconThemeData(
-            color: viewModel.backgroundColor == Colors.black.value ? Colors.white : Colors.black,
+            color: Color(viewModel.borderColor),
           ),
           backgroundColor: Colors.transparent,
+          scrolledUnderElevation: 0,
         ),
         body: SafeArea(
           child: Padding(
@@ -62,48 +75,16 @@ final class NoteScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      TextField(
-                        maxLines: 1,
-                        controller: _titleController,
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Color(viewModel.fontColor),
-                        ),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: '제목을 입력하세요...',
-                          hintStyle: TextStyle(
-                            fontSize: 24,
-                            color: Color(viewModel.fontColor).withOpacity(0.5),
-                          ),
-                        ),
-                        onChanged: (value) {
-                          viewModel.title = _titleController.text;
-                        },
+                      TitleTextFormField(
+                        textEditingController: _titleController,
+                        onChanged: (value) => viewModel.title = value,
+                        fontColor: Color(viewModel.fontColor),
                       ),
                       Expanded(
-                        child: TextField(
-                          maxLines: 50,
-                          controller: _contentController,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color(viewModel.fontColor),
-                          ),
-                          textAlign: TextAlign.left,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: '내용을 입력하세요...',
-                            hintStyle: TextStyle(
-                              fontSize: 16,
-                              color: Color(viewModel.fontColor).withOpacity(0.5),
-                            ),
-                          ),
-                          onChanged: (value) {
-                            viewModel.content = _contentController.text;
-                          },
+                        child: ContentTextFormField(
+                          textEditingController: _contentController,
+                          onChanged: (value) => viewModel.content = value,
+                          fontColor: Color(viewModel.fontColor),
                         ),
                       ),
                     ],
