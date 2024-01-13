@@ -8,8 +8,8 @@ final class TitleTextFormField extends StatelessWidget {
 
   const TitleTextFormField({
     super.key,
-    required TextEditingController? textEditingController,
-    required Function(String)? onChanged,
+    TextEditingController? textEditingController,
+    Function(String)? onChanged,
     required Color fontColor,
   })  : _textEditingController = textEditingController,
         _onChanged = onChanged,
@@ -19,7 +19,7 @@ final class TitleTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: 1,
-      maxLength: 20,
+      maxLength: 15,
       controller: _textEditingController,
       style: TextStyle(
         fontSize: 24,
