@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NoteViewState {
   Note get note => throw _privateConstructorUsedError;
-  int? get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteViewStateCopyWith<NoteViewState> get copyWith =>
@@ -30,9 +29,7 @@ abstract class $NoteViewStateCopyWith<$Res> {
           NoteViewState value, $Res Function(NoteViewState) then) =
       _$NoteViewStateCopyWithImpl<$Res, NoteViewState>;
   @useResult
-  $Res call({Note note, int? index});
-
-  $NoteCopyWith<$Res> get note;
+  $Res call({Note note});
 }
 
 /// @nodoc
@@ -49,26 +46,13 @@ class _$NoteViewStateCopyWithImpl<$Res, $Val extends NoteViewState>
   @override
   $Res call({
     Object? note = null,
-    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
       note: null == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as Note,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $NoteCopyWith<$Res> get note {
-    return $NoteCopyWith<$Res>(_value.note, (value) {
-      return _then(_value.copyWith(note: value) as $Val);
-    });
   }
 }
 
@@ -80,10 +64,7 @@ abstract class _$$NoteViewStateImplCopyWith<$Res>
       __$$NoteViewStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Note note, int? index});
-
-  @override
-  $NoteCopyWith<$Res> get note;
+  $Res call({Note note});
 }
 
 /// @nodoc
@@ -98,17 +79,12 @@ class __$$NoteViewStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? note = null,
-    Object? index = freezed,
   }) {
     return _then(_$NoteViewStateImpl(
       note: null == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as Note,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -118,16 +94,14 @@ class __$$NoteViewStateImplCopyWithImpl<$Res>
 class _$NoteViewStateImpl
     with DiagnosticableTreeMixin
     implements _NoteViewState {
-  const _$NoteViewStateImpl({required this.note, this.index});
+  const _$NoteViewStateImpl({required this.note});
 
   @override
   final Note note;
-  @override
-  final int? index;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteViewState(note: $note, index: $index)';
+    return 'NoteViewState(note: $note)';
   }
 
   @override
@@ -135,8 +109,7 @@ class _$NoteViewStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NoteViewState'))
-      ..add(DiagnosticsProperty('note', note))
-      ..add(DiagnosticsProperty('index', index));
+      ..add(DiagnosticsProperty('note', note));
   }
 
   @override
@@ -144,12 +117,11 @@ class _$NoteViewStateImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteViewStateImpl &&
-            (identical(other.note, note) || other.note == note) &&
-            (identical(other.index, index) || other.index == index));
+            (identical(other.note, note) || other.note == note));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, note, index);
+  int get hashCode => Object.hash(runtimeType, note);
 
   @JsonKey(ignore: true)
   @override
@@ -159,13 +131,11 @@ class _$NoteViewStateImpl
 }
 
 abstract class _NoteViewState implements NoteViewState {
-  const factory _NoteViewState({required final Note note, final int? index}) =
+  const factory _NoteViewState({required final Note note}) =
       _$NoteViewStateImpl;
 
   @override
   Note get note;
-  @override
-  int? get index;
   @override
   @JsonKey(ignore: true)
   _$$NoteViewStateImplCopyWith<_$NoteViewStateImpl> get copyWith =>

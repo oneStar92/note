@@ -21,7 +21,7 @@ final class NoteListView extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => getNoteViewModelProvider(index: index, note: viewModel.notes[index]),
+                      builder: (_) => getNoteViewModelProvider(note: viewModel.notes[index]),
                     ),
                   );
                   context.read<NoteListViewModel>().readAll();

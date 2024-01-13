@@ -33,8 +33,7 @@ final noteListViewModelProvider = ChangeNotifierProvider<NoteListViewModel>(
 //   },
 // );
 
-ChangeNotifierProvider<NoteViewModel> getNoteViewModelProvider({int? index, Note? note}) {
-  final targetNote = note ?? Note(title: '', content: '', backgroundColor: 0xFF000000, fontColor: 0xFFFFFFFF);
+ChangeNotifierProvider<NoteViewModel> getNoteViewModelProvider({Note? note}) {
   return ChangeNotifierProvider<NoteViewModel>(create: (_) {
     final repository = HiveNoteRepository.shared;
     final createUseCase = NoteCreateUseCaseImpl(repository: repository);
@@ -43,8 +42,7 @@ ChangeNotifierProvider<NoteViewModel> getNoteViewModelProvider({int? index, Note
       createUseCase: createUseCase,
       updateUseCase: updateUseCase,
       noteViewState: NoteViewState(
-        index: index,
-        note: targetNote,
+        note: note ?? Note(),
       ),
     );
   }, builder: (context, child) {

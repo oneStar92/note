@@ -8,6 +8,5 @@ part 'note_view_state.freezed.dart';
 class NoteViewState with _$NoteViewState {
   const factory NoteViewState({
     required Note note,
-    int? index,
   }) = _NoteViewState;
 }
