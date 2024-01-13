@@ -1,6 +1,7 @@
 import 'package:note/common/result.dart';
 import 'package:note/domain/interface/repository/note_repository.dart';
 import 'package:note/domain/interface/use_cases/note_update_use_case.dart';
+import 'package:note/domain/model/note.dart';
 
 final class NoteUpdateUseCaseImpl implements NoteUpdateUseCase {
   final NoteRepository _repository;
@@ -10,5 +11,5 @@ final class NoteUpdateUseCaseImpl implements NoteUpdateUseCase {
   }) : _repository = repository;
 
   @override
-  Future<Result<void>> execute({required UpdateQuery query}) => _repository.update(index: query.index, note: query.note);
+  Future<Result<void>> execute({required Note query}) => _repository.update(note: query);
 }
