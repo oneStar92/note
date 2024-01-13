@@ -21,14 +21,14 @@ final class NoteViewModel extends ChangeNotifier {
 
   int get fontColor => _state.note.fontColor;
 
+  int get borderColor => 0xFF888888 < _state.note.backgroundColor ? 0xFF000000 : 0xFFFFFFFF;
+
   set title(String value) {
     _state = _state.copyWith(note: _state.note.copyWith(title: value));
-    notifyListeners();
   }
 
   set content(String value) {
     _state = _state.copyWith(note: _state.note.copyWith(content: value));
-    notifyListeners();
   }
 
   set backgroundColor(int value) {
