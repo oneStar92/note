@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-final class ContentTextField extends StatelessWidget {
+final class ContentTextFormField extends StatelessWidget {
   final String _hint = '내용을 입력하세요.';
   final TextEditingController? _textEditingController;
   final Function(String)? _onChanged;
   final Color _fontColor;
 
-  const ContentTextField({
+  const ContentTextFormField({
     super.key,
     TextEditingController? textEditingController,
     Function(String)? onChanged,
@@ -18,8 +18,9 @@ final class ContentTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: 0,
+      maxLines: null,
       maxLength: 1000,
+      expands: true,
       controller: _textEditingController,
       style: TextStyle(
         fontSize: 16,
