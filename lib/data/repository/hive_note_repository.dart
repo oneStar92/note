@@ -1,4 +1,6 @@
 import 'package:note/common/result.dart';
+import 'package:note/data/dao/note_hive_dao.dart';
+import 'package:note/data/mapper/hive_dao_mapper.dart';
 import 'package:note/domain/interface/repository/note_repository.dart';
 import 'package:note/domain/model/note.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -8,10 +10,10 @@ final class HiveNoteRepository implements NoteRepository {
 
   HiveNoteRepository._();
 
-  Box<Note>? _box;
+  Box<NoteHiveDAO>? _box;
 
   Future<void> configureBox() async {
-    _box = await Hive.openBox<Note>('note');
+    _box = await Hive.openBox<NoteHiveDAO>('note');
   }
 
   @override
@@ -19,7 +21,7 @@ final class HiveNoteRepository implements NoteRepository {
     final box = _box;
     if (box != null) {
       try {
-        return Result.success(await _box?.add(note));
+        return Result.success(await box.add(note.toDAO()));
       } catch (e) {
         return Result.error(e.toString());
       }
@@ -33,7 +35,7 @@ final class HiveNoteRepository implements NoteRepository {
     final box = _box;
     if (box != null) {
       try {
-        return Result.success(await note.delete());
+        return Result.success(await box.delete(note.primaryKey));
       } catch (e) {
         return Result.error(e.toString());
       }
@@ -46,18 +48,18 @@ final class HiveNoteRepository implements NoteRepository {
   Future<Result<List<Note>>> read() async {
     final box = _box;
     if (box != null) {
-      return Result.success(box.values.toList());
+      return Result.success(box.values.map((e) => e.toDomain()).toList());
     } else {
       return const Result.error('Box is null');
     }
   }
 
   @override
-  Future<Result<void>> update({required int index, required Note note}) async {
+  Future<Result<void>> update({required Note note}) async {
     final box = _box;
     if (box != null) {
       try {
-        return Result.success(await box.putAt(index, note));
+        return Result.success(await box.put(note.primaryKey, note.toDAO()));
       } catch (e) {
         return Result.error(e.toString());
       }
