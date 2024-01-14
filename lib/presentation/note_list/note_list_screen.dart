@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:note/di/view_model_provider.dart';
 import 'package:note/domain/model/note.dart';
 import 'package:note/presentation/note_list/components/note_list_item.dart';
+import 'package:note/presentation/note_list/model/sort_type.dart';
 import 'package:note/presentation/note_list/note_list_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,31 @@ final class NoteListScreen extends StatelessWidget {
                 _pushNoteScreen(context: context).then((_) => viewModel.readAll());
               },
               icon: const Icon(Icons.add),
+            ),
+            PopupMenuButton(
+              initialValue: viewModel.sortType,
+              onSelected: (sortType) => viewModel.sortType = sortType,
+              itemBuilder: (context) => [
+                PopupMenuItem<SortType>(
+                  value: SortType.updateDate,
+                  child: Row(
+                    children: [
+                      Expanded(child: Text(SortType.updateDate.toString())),
+                      Icon(viewModel.getSortDirection(SortType.updateDate)?.icon),
+                    ],
+                  ),
+                ),
+                PopupMenuItem<SortType>(
+                  value: SortType.title,
+                  child: Row(
+                    children: [
+                      Expanded(child: Text(SortType.title.toString())),
+                      Icon(viewModel.getSortDirection(SortType.title)?.icon),
+                    ],
+                  ),
+                ),
+              ],
+              icon: const Icon(Icons.sort),
             ),
           ],
         ),
