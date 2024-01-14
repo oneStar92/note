@@ -21,59 +21,51 @@ final class NoteListScreen extends StatelessWidget {
           ),
           backgroundColor: Colors.black,
           centerTitle: false,
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                _pushNoteScreen(context: context).then((_) => viewModel.readAll());
+              },
+              icon: const Icon(Icons.add),
+            ),
+          ],
         ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          height: 80,
-                          width: double.infinity,
-                          child: NoteListItem(
-                            onClick: () => _pushNoteScreen(context: context, note: viewModel.notes[index])
-                                .then((value) => viewModel.readAll()),
-                            onDelete: () => viewModel.deleteAt(
-                              index,
-                              onSuccess: () => _showDeleteUndoSnackBar(
-                                context: context,
-                                onUndo: () => viewModel.undo(),
-                              ),
-                            ),
-                            title: viewModel.notes[index].title,
-                            date: viewModel.dateAt(index),
-                            preview: viewModel.previewAt(index),
-                            backgroundColor: Color(viewModel.notes[index].backgroundColor),
-                            fontColor: Color(viewModel.notes[index].fontColor),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider(
-                          color: Colors.transparent,
-                          height: 8.0,
-                        );
-                      },
-                      itemCount: viewModel.notes.length),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: AddButton(
-                    onClick: () {
-                      _pushNoteScreen(context: context).then((_) => viewModel.readAll());
-                    },
-                  ),
-                ),
-              ],
-            ),
+            child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    height: 80,
+                    width: double.infinity,
+                    child: NoteListItem(
+                      onClick: () => _pushNoteScreen(context: context, note: viewModel.notes[index])
+                          .then((value) => viewModel.readAll()),
+                      onDelete: () => viewModel.deleteAt(
+                        index,
+                        onSuccess: () => _showDeleteUndoSnackBar(
+                          context: context,
+                          onUndo: () => viewModel.undo(),
+                        ),
+                      ),
+                      title: viewModel.notes[index].title,
+                      date: viewModel.dateAt(index),
+                      preview: viewModel.previewAt(index),
+                      backgroundColor: Color(viewModel.notes[index].backgroundColor),
+                      fontColor: Color(viewModel.notes[index].fontColor),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider(
+                    color: Colors.transparent,
+                    height: 8.0,
+                  );
+                },
+                itemCount: viewModel.notes.length),
           ),
         ),
       );
