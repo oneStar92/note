@@ -11,5 +11,5 @@ final class NoteDeleteUseCaseImpl implements NoteDeleteUseCase {
   }) : _repository = repository;
 
   @override
-  Future<Result<void>> execute({required Note query}) => _repository.delete(note: query);
+  Future<Result<Note>> execute({required Note query}) => _repository.delete(note: query);
 }
