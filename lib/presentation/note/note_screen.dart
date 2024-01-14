@@ -40,7 +40,7 @@ final class NoteScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.save),
               ),
-              PopupSettingButton(
+              PopupColorsSettingButton(
                 onSelected: (menu) {
                   _showColorPickerDialog(
                     context: context,

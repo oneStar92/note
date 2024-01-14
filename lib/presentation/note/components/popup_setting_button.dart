@@ -6,12 +6,12 @@ enum SettingMenu {
   fontColor,
 }
 
-final class PopupSettingButton extends StatelessWidget {
+final class PopupColorsSettingButton extends StatelessWidget {
   final Function(SettingMenu) _onSelected;
   final Color _backgroundColor;
   final Color _fontColor;
 
-  const PopupSettingButton({
+  const PopupColorsSettingButton({
     super.key,
     required Function(SettingMenu) onSelected,
     required Color backgroundColor,
