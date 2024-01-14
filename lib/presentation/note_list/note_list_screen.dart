@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note/di/view_model_provider.dart';
 import 'package:note/domain/model/note.dart';
-import 'package:note/presentation/note_list/components/add_button.dart';
 import 'package:note/presentation/note_list/components/note_list_item.dart';
 import 'package:note/presentation/note_list/note_list_view_model.dart';
 import 'package:provider/provider.dart';
