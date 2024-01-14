@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NoteListViewState {
   List<Note> get notes => throw _privateConstructorUsedError;
+  Note? get lastDeletedNote => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteListViewStateCopyWith<NoteListViewState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $NoteListViewStateCopyWith<$Res> {
           NoteListViewState value, $Res Function(NoteListViewState) then) =
       _$NoteListViewStateCopyWithImpl<$Res, NoteListViewState>;
   @useResult
-  $Res call({List<Note> notes});
+  $Res call({List<Note> notes, Note? lastDeletedNote});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$NoteListViewStateCopyWithImpl<$Res, $Val extends NoteListViewState>
   @override
   $Res call({
     Object? notes = null,
+    Object? lastDeletedNote = freezed,
   }) {
     return _then(_value.copyWith(
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
+      lastDeletedNote: freezed == lastDeletedNote
+          ? _value.lastDeletedNote
+          : lastDeletedNote // ignore: cast_nullable_to_non_nullable
+              as Note?,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$NoteListViewStateImplCopyWith<$Res>
       __$$NoteListViewStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Note> notes});
+  $Res call({List<Note> notes, Note? lastDeletedNote});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$NoteListViewStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? notes = null,
+    Object? lastDeletedNote = freezed,
   }) {
     return _then(_$NoteListViewStateImpl(
       notes: null == notes
           ? _value._notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
+      lastDeletedNote: freezed == lastDeletedNote
+          ? _value.lastDeletedNote
+          : lastDeletedNote // ignore: cast_nullable_to_non_nullable
+              as Note?,
     ));
   }
 }
@@ -94,7 +105,8 @@ class __$$NoteListViewStateImplCopyWithImpl<$Res>
 class _$NoteListViewStateImpl
     with DiagnosticableTreeMixin
     implements _NoteListViewState {
-  const _$NoteListViewStateImpl({final List<Note> notes = const <Note>[]})
+  const _$NoteListViewStateImpl(
+      {final List<Note> notes = const <Note>[], this.lastDeletedNote})
       : _notes = notes;
 
   final List<Note> _notes;
@@ -107,8 +119,11 @@ class _$NoteListViewStateImpl
   }
 
   @override
+  final Note? lastDeletedNote;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteListViewState(notes: $notes)';
+    return 'NoteListViewState(notes: $notes, lastDeletedNote: $lastDeletedNote)';
   }
 
   @override
@@ -116,7 +131,8 @@ class _$NoteListViewStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NoteListViewState'))
-      ..add(DiagnosticsProperty('notes', notes));
+      ..add(DiagnosticsProperty('notes', notes))
+      ..add(DiagnosticsProperty('lastDeletedNote', lastDeletedNote));
   }
 
   @override
@@ -124,12 +140,14 @@ class _$NoteListViewStateImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteListViewStateImpl &&
-            const DeepCollectionEquality().equals(other._notes, _notes));
+            const DeepCollectionEquality().equals(other._notes, _notes) &&
+            (identical(other.lastDeletedNote, lastDeletedNote) ||
+                other.lastDeletedNote == lastDeletedNote));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_notes));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_notes), lastDeletedNote);
 
   @JsonKey(ignore: true)
   @override
@@ -140,11 +158,14 @@ class _$NoteListViewStateImpl
 }
 
 abstract class _NoteListViewState implements NoteListViewState {
-  const factory _NoteListViewState({final List<Note> notes}) =
-      _$NoteListViewStateImpl;
+  const factory _NoteListViewState(
+      {final List<Note> notes,
+      final Note? lastDeletedNote}) = _$NoteListViewStateImpl;
 
   @override
   List<Note> get notes;
+  @override
+  Note? get lastDeletedNote;
   @override
   @JsonKey(ignore: true)
   _$$NoteListViewStateImplCopyWith<_$NoteListViewStateImpl> get copyWith =>

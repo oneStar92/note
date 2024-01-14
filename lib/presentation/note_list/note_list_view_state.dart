@@ -8,5 +8,6 @@ part 'note_list_view_state.freezed.dart';
 class NoteListViewState with _$NoteListViewState {
   const factory NoteListViewState({
     @Default(<Note>[]) List<Note> notes,
+    Note? lastDeletedNote,
   }) = _NoteListViewState;
 }
