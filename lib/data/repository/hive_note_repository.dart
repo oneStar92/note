@@ -31,11 +31,12 @@ final class HiveNoteRepository implements NoteRepository {
   }
 
   @override
-  Future<Result<void>> delete({required Note note}) async {
+  Future<Result<Note>> delete({required Note note}) async {
     final box = _box;
     if (box != null) {
       try {
-        return Result.success(await box.delete(note.primaryKey));
+        await box.delete(note.primaryKey);
+        return Result.success(note);
       } catch (e) {
         return Result.error(e.toString());
       }
