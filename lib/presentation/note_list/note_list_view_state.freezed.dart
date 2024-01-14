@@ -17,6 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NoteListViewState {
   List<Note> get notes => throw _privateConstructorUsedError;
+  SortType get sortType => throw _privateConstructorUsedError;
+  Map<SortType, SortDirection> get sortTypes =>
+      throw _privateConstructorUsedError;
   Note? get lastDeletedNote => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +33,11 @@ abstract class $NoteListViewStateCopyWith<$Res> {
           NoteListViewState value, $Res Function(NoteListViewState) then) =
       _$NoteListViewStateCopyWithImpl<$Res, NoteListViewState>;
   @useResult
-  $Res call({List<Note> notes, Note? lastDeletedNote});
+  $Res call(
+      {List<Note> notes,
+      SortType sortType,
+      Map<SortType, SortDirection> sortTypes,
+      Note? lastDeletedNote});
 }
 
 /// @nodoc
@@ -47,6 +54,8 @@ class _$NoteListViewStateCopyWithImpl<$Res, $Val extends NoteListViewState>
   @override
   $Res call({
     Object? notes = null,
+    Object? sortType = null,
+    Object? sortTypes = null,
     Object? lastDeletedNote = freezed,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +63,14 @@ class _$NoteListViewStateCopyWithImpl<$Res, $Val extends NoteListViewState>
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
+      sortType: null == sortType
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortType,
+      sortTypes: null == sortTypes
+          ? _value.sortTypes
+          : sortTypes // ignore: cast_nullable_to_non_nullable
+              as Map<SortType, SortDirection>,
       lastDeletedNote: freezed == lastDeletedNote
           ? _value.lastDeletedNote
           : lastDeletedNote // ignore: cast_nullable_to_non_nullable
@@ -70,7 +87,11 @@ abstract class _$$NoteListViewStateImplCopyWith<$Res>
       __$$NoteListViewStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Note> notes, Note? lastDeletedNote});
+  $Res call(
+      {List<Note> notes,
+      SortType sortType,
+      Map<SortType, SortDirection> sortTypes,
+      Note? lastDeletedNote});
 }
 
 /// @nodoc
@@ -85,6 +106,8 @@ class __$$NoteListViewStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? notes = null,
+    Object? sortType = null,
+    Object? sortTypes = null,
     Object? lastDeletedNote = freezed,
   }) {
     return _then(_$NoteListViewStateImpl(
@@ -92,6 +115,14 @@ class __$$NoteListViewStateImplCopyWithImpl<$Res>
           ? _value._notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
+      sortType: null == sortType
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortType,
+      sortTypes: null == sortTypes
+          ? _value._sortTypes
+          : sortTypes // ignore: cast_nullable_to_non_nullable
+              as Map<SortType, SortDirection>,
       lastDeletedNote: freezed == lastDeletedNote
           ? _value.lastDeletedNote
           : lastDeletedNote // ignore: cast_nullable_to_non_nullable
@@ -106,8 +137,16 @@ class _$NoteListViewStateImpl
     with DiagnosticableTreeMixin
     implements _NoteListViewState {
   const _$NoteListViewStateImpl(
-      {final List<Note> notes = const <Note>[], this.lastDeletedNote})
-      : _notes = notes;
+      {final List<Note> notes = const <Note>[],
+      this.sortType = SortType.updateDate,
+      final Map<SortType, SortDirection> sortTypes =
+          const <SortType, SortDirection>{
+        SortType.title: SortDirection.ascending,
+        SortType.updateDate: SortDirection.ascending
+      },
+      this.lastDeletedNote})
+      : _notes = notes,
+        _sortTypes = sortTypes;
 
   final List<Note> _notes;
   @override
@@ -119,11 +158,23 @@ class _$NoteListViewStateImpl
   }
 
   @override
+  @JsonKey()
+  final SortType sortType;
+  final Map<SortType, SortDirection> _sortTypes;
+  @override
+  @JsonKey()
+  Map<SortType, SortDirection> get sortTypes {
+    if (_sortTypes is EqualUnmodifiableMapView) return _sortTypes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_sortTypes);
+  }
+
+  @override
   final Note? lastDeletedNote;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteListViewState(notes: $notes, lastDeletedNote: $lastDeletedNote)';
+    return 'NoteListViewState(notes: $notes, sortType: $sortType, sortTypes: $sortTypes, lastDeletedNote: $lastDeletedNote)';
   }
 
   @override
@@ -132,6 +183,8 @@ class _$NoteListViewStateImpl
     properties
       ..add(DiagnosticsProperty('type', 'NoteListViewState'))
       ..add(DiagnosticsProperty('notes', notes))
+      ..add(DiagnosticsProperty('sortType', sortType))
+      ..add(DiagnosticsProperty('sortTypes', sortTypes))
       ..add(DiagnosticsProperty('lastDeletedNote', lastDeletedNote));
   }
 
@@ -141,13 +194,21 @@ class _$NoteListViewStateImpl
         (other.runtimeType == runtimeType &&
             other is _$NoteListViewStateImpl &&
             const DeepCollectionEquality().equals(other._notes, _notes) &&
+            (identical(other.sortType, sortType) ||
+                other.sortType == sortType) &&
+            const DeepCollectionEquality()
+                .equals(other._sortTypes, _sortTypes) &&
             (identical(other.lastDeletedNote, lastDeletedNote) ||
                 other.lastDeletedNote == lastDeletedNote));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_notes), lastDeletedNote);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_notes),
+      sortType,
+      const DeepCollectionEquality().hash(_sortTypes),
+      lastDeletedNote);
 
   @JsonKey(ignore: true)
   @override
@@ -160,10 +221,16 @@ class _$NoteListViewStateImpl
 abstract class _NoteListViewState implements NoteListViewState {
   const factory _NoteListViewState(
       {final List<Note> notes,
+      final SortType sortType,
+      final Map<SortType, SortDirection> sortTypes,
       final Note? lastDeletedNote}) = _$NoteListViewStateImpl;
 
   @override
   List<Note> get notes;
+  @override
+  SortType get sortType;
+  @override
+  Map<SortType, SortDirection> get sortTypes;
   @override
   Note? get lastDeletedNote;
   @override
