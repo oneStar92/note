@@ -32,6 +32,6 @@ ChangeNotifierProvider<NoteViewModel> getNoteViewModelProvider({Note? note}) {
         ),
       );
     },
-    child: NoteScreen(),
+    child: NoteScreen(title: note?.title, content: note?.content,),
   );
 }
