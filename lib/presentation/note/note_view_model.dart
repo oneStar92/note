@@ -41,15 +41,12 @@ final class NoteViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Result<void>> save() async {
+  Future<void> save({required Function(String) onError}) async {
     if (_state.note.title.isEmpty || _state.note.content.isEmpty) {
-      return const Result.error('제목과 내용을 적어주세요!!');
+      onError('제목과 내용을 적어주세요!!');
     } else {
       final result = await _saveUseCase.execute(query: _state.note);
-      return result.map(
-        success: (value) => const Result.success(()),
-        error: (_) => const Result.error('저장에 실패했습니다.'),
-      );
+      result.when(success: (_) {}, error: onError);
     }
   }
 }
