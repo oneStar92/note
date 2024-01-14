@@ -15,7 +15,9 @@ final class NoteListViewModel extends ChangeNotifier {
     required NoteDeleteUseCase deleteUseCase,
   })  : _readUseCase = readUseCase,
         _deleteUseCase = deleteUseCase,
-        _state = const NoteListViewState();
+        _state = const NoteListViewState() {
+    readAll();
+  }
 
   List<Note> get notes => _state.notes;
 
