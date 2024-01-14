@@ -6,23 +6,16 @@ import 'package:note/presentation/note/components/title_text_form_field.dart';
 import 'package:note/presentation/note/note_view_model.dart';
 import 'package:provider/provider.dart';
 
-final class NoteScreen extends StatefulWidget {
-  const NoteScreen({super.key});
+final class NoteScreen extends StatelessWidget {
+  final TextEditingController _titleController;
+  final TextEditingController _contentController;
 
-  @override
-  State<NoteScreen> createState() => _NoteScreenState();
-}
-
-class _NoteScreenState extends State<NoteScreen> {
-  late final TextEditingController _titleController;
-  late final TextEditingController _contentController;
-
-  @override
-  void initState() {
-    _titleController = TextEditingController(text: context.read<NoteViewModel>().title);
-    _contentController = TextEditingController(text: context.read<NoteViewModel>().content);
-    super.initState();
-  }
+  NoteScreen({
+    super.key,
+    String? title,
+    String? content,
+  })  : _titleController = TextEditingController(text: title),
+        _contentController = TextEditingController(text: content);
 
   @override
   Widget build(BuildContext context) {
