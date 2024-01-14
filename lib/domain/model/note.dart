@@ -13,7 +13,7 @@ class Note with _$Note {
     @Default('') String content,
     @Default(0xFF000000) int backgroundColor,
     @Default(0xFFFFFFFF) int fontColor,
-    DateTime? updateDate,
+    required DateTime updateDate,
   }) = _Note;
 
   Note copyWith({

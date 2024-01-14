@@ -21,7 +21,7 @@ mixin _$Note {
   String get content => throw _privateConstructorUsedError;
   int get backgroundColor => throw _privateConstructorUsedError;
   int get fontColor => throw _privateConstructorUsedError;
-  DateTime? get updateDate => throw _privateConstructorUsedError;
+  DateTime get updateDate => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -33,7 +33,7 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
       this.content = '',
       this.backgroundColor = 0xFF000000,
       this.fontColor = 0xFFFFFFFF,
-      this.updateDate})
+      required this.updateDate})
       : super._();
 
   @override
@@ -51,7 +51,7 @@ class _$NoteImpl extends _Note with DiagnosticableTreeMixin {
   @JsonKey()
   final int fontColor;
   @override
-  final DateTime? updateDate;
+  final DateTime updateDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -100,7 +100,7 @@ abstract class _Note extends Note {
       final String content,
       final int backgroundColor,
       final int fontColor,
-      final DateTime? updateDate}) = _$NoteImpl;
+      required final DateTime updateDate}) = _$NoteImpl;
   _Note._() : super._();
 
   @override
@@ -114,5 +114,5 @@ abstract class _Note extends Note {
   @override
   int get fontColor;
   @override
-  DateTime? get updateDate;
+  DateTime get updateDate;
 }

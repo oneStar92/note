@@ -44,7 +44,7 @@ final class NoteViewModel extends ChangeNotifier {
     if (_state.note.title.isEmpty || _state.note.content.isEmpty) {
       onError('제목과 내용을 적어주세요!!');
     } else {
-      final result = await _saveUseCase.execute(query: _state.note);
+      final result = await _saveUseCase.execute(query: _state.note.copyWith(updateDate: DateTime.now()));
       result.when(success: (_) {}, error: onError);
     }
   }

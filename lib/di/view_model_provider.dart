@@ -29,7 +29,7 @@ ChangeNotifierProvider<NoteViewModel> getNoteViewModelProvider({Note? note}) {
       return NoteViewModel(
         noteSaveUseCase: noteSaveUseCase,
         noteViewState: NoteViewState(
-          note: note ?? Note(),
+          note: note ?? Note(updateDate: DateTime.now()),
         ),
       );
     },
