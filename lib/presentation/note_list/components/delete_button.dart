@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note/presentation/interface/base_view.dart';
+import 'package:note/core/view/base_view.dart';
 
 final class DeleteButton extends BaseView {
   final Color _color;

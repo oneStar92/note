@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:note/common/result.dart';
 import 'package:note/domain/interface/use_cases/note_save_use_case.dart';
 import 'package:note/presentation/note/note_view_state.dart';
 

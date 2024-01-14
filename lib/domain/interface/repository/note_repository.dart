@@ -1,4 +1,4 @@
-import 'package:note/common/result.dart';
+import 'package:note/core/result/result.dart';
 import 'package:note/domain/model/note.dart';
 
 abstract interface class NoteRepository {

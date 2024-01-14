@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note/presentation/interface/base_view.dart';
+import 'package:note/core/view/base_view.dart';
 import 'package:note/presentation/note_list/components/delete_button.dart';
 
 final class NoteListItem extends BaseView {

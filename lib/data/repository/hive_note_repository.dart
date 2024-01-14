@@ -1,4 +1,4 @@
-import 'package:note/common/result.dart';
+import 'package:note/core/result/result.dart';
 import 'package:note/data/dao/note_hive_dao.dart';
 import 'package:note/data/mapper/hive_dao_mapper.dart';
 import 'package:note/domain/interface/repository/note_repository.dart';
