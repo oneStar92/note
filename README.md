@@ -1,16 +1,26 @@
-# note
+###### tags: `README`
+# Note
 
-A new Note project.
+간단한 노트 작성 앱입니다.
 
-## Getting Started
+## 개발 상세
 
-This project is a starting point for a Flutter application.
+- MVVM - C 아키텍쳐
+- Provider Library를 이용하여 상태관리
+- Hive를 이용하여 LocalDB 이용.
+- Freezed Object 사용.
 
-A few resources to get you started if this is your first Flutter project:
+<br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 💻 실행 화면
+
+|Create Note|Create Error With SnackBar|
+|:---:|:---:|
+|<img src="https://i.imgur.com/IAx0jp2.gif" width="200">|<img src="https://i.imgur.com/a1fgY8G.gif" width="200">|
+
+|Updating|Sorting|Deleting And Undo|
+|:---:|:---:|:---:|
+|<img src="https://i.imgur.com/9dAdVS3.gif" width="200">|<img src="https://i.imgur.com/CTgw3oG.gif" width="200">|<img src="https://i.imgur.com/fusvZwL.gif" width="200">|
+
+<br>
