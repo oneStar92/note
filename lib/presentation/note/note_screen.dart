@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:note/presentation/note/components/color_picker_dialog.dart';
 import 'package:note/presentation/note/components/content_text_form_field.dart';
 import 'package:note/presentation/note/components/popup_setting_button.dart';
-import 'package:note/presentation/note/components/save_button.dart';
 import 'package:note/presentation/note/components/title_text_form_field.dart';
 import 'package:note/presentation/note/note_view_model.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +37,16 @@ class _NoteScreenState extends State<NoteScreen> {
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,
             actions: [
+              IconButton(
+                onPressed: () {
+                  viewModel.save(
+                    onError: (errorMessage) {
+                      _showErrorSnackBar(context: context, errorMessage: errorMessage);
+                    },
+                  );
+                },
+                icon: const Icon(Icons.save),
+              ),
               PopupSettingButton(
                 onSelected: (menu) {
                   _showColorPickerDialog(
@@ -58,54 +67,18 @@ class _NoteScreenState extends State<NoteScreen> {
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Stack(
+              child: Column(
                 children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Column(
-                      children: [
-                        TitleTextFormField(
-                          textEditingController: _titleController,
-                          onChanged: (value) => viewModel.title = value,
-                          fontColor: Color(viewModel.fontColor),
-                        ),
-                        Expanded(
-                          child: ContentTextFormField(
-                            textEditingController: _contentController,
-                            onChanged: (value) => viewModel.content = value,
-                            fontColor: Color(viewModel.fontColor),
-                          ),
-                        ),
-                      ],
-                    ),
+                  TitleTextFormField(
+                    textEditingController: _titleController,
+                    onChanged: (value) => viewModel.title = value,
+                    fontColor: Color(viewModel.fontColor),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: SaveButton(
-                      onClick: () async {
-                        final result = await context.read<NoteViewModel>().save();
-                        result.when(
-                          success: (_) {
-                            Navigator.pop(context);
-                          },
-                          error: (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                e,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              duration: const Duration(seconds: 1),
-                            ));
-                          },
-                        );
-                      },
+                  Expanded(
+                    child: ContentTextFormField(
+                      textEditingController: _contentController,
+                      onChanged: (value) => viewModel.content = value,
+                      fontColor: Color(viewModel.fontColor),
                     ),
                   ),
                 ],
@@ -128,5 +101,18 @@ class _NoteScreenState extends State<NoteScreen> {
         );
       },
     );
+  }
+
+  void _showErrorSnackBar({required BuildContext context, required String errorMessage}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        errorMessage,
+        style: const TextStyle(
+          fontSize: 24,
+          color: Colors.white,
+        ),
+      ),
+      duration: const Duration(seconds: 1),
+    ));
   }
 }
