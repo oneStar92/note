@@ -40,7 +40,13 @@ final class NoteListScreen extends StatelessWidget {
                           child: NoteListItem(
                             onClick: () => _pushNoteScreen(context: context, note: viewModel.notes[index])
                                 .then((value) => viewModel.readAll()),
-                            onDelete: () => viewModel.deleteAt(index),
+                            onDelete: () => viewModel.deleteAt(
+                              index,
+                              onSuccess: () => _showDeleteUndoSnackBar(
+                                context: context,
+                                onUndo: () => viewModel.undo(),
+                              ),
+                            ),
                             title: viewModel.notes[index].title,
                             preview: viewModel.previewAt(index),
                             backgroundColor: Color(viewModel.notes[index].backgroundColor),
@@ -80,5 +86,22 @@ final class NoteListScreen extends StatelessWidget {
         builder: (_) => getNoteViewModelProvider(note: note),
       ),
     );
+  }
+
+  void _showDeleteUndoSnackBar({required BuildContext context, required Function() onUndo}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: const Text(
+        'Note Deleted',
+        style: TextStyle(
+          fontSize: 24,
+          color: Colors.white,
+        ),
+      ),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: onUndo,
+      ),
+      duration: const Duration(seconds: 5),
+    ));
   }
 }
