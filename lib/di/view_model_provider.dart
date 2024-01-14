@@ -14,8 +14,9 @@ final noteListViewModelProvider = ChangeNotifierProvider<NoteListViewModel>(
   create: (_) {
     final repository = HiveNoteRepository.shared;
     final readUseCase = NoteReadUseCaseImpl(repository: repository);
+    final saveUseCase = NoteSaveUseCaseImpl(repository: repository);
     final deleteUseCase = NoteDeleteUseCaseImpl(repository: repository);
-    return NoteListViewModel(readUseCase: readUseCase, deleteUseCase: deleteUseCase);
+    return NoteListViewModel(readUseCase: readUseCase, deleteUseCase: deleteUseCase, saveUseCase: saveUseCase);
   },
   child: const NoteListScreen(),
 );
