@@ -48,6 +48,7 @@ final class NoteListScreen extends StatelessWidget {
                               ),
                             ),
                             title: viewModel.notes[index].title,
+                            date: viewModel.dateAt(index),
                             preview: viewModel.previewAt(index),
                             backgroundColor: Color(viewModel.notes[index].backgroundColor),
                             fontColor: Color(viewModel.notes[index].fontColor),

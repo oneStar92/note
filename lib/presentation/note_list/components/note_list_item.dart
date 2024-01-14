@@ -5,6 +5,7 @@ import 'package:note/presentation/note_list/components/delete_button.dart';
 final class NoteListItem extends BaseView {
   final Function() _onDelete;
   final String _title;
+  final String _date;
   final String _preview;
   final Color _backgroundColor;
   final Color _fontColor;
@@ -14,6 +15,7 @@ final class NoteListItem extends BaseView {
     super.onClick,
     required Function() onDelete,
     required String title,
+    required String date,
     required String preview,
     required Color backgroundColor,
     required Color fontColor,
@@ -21,6 +23,7 @@ final class NoteListItem extends BaseView {
         _backgroundColor = backgroundColor,
         _preview = preview,
         _title = title,
+        _date = date,
         _onDelete = onDelete;
 
   @override
@@ -35,11 +38,25 @@ final class NoteListItem extends BaseView {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: Text(
-              _title,
-              style: TextStyle(fontSize: 24, color: _fontColor, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.left,
-              maxLines: 1,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 20,
+                  child: Text(
+                    _title,
+                    style: TextStyle(fontSize: 24, color: _fontColor, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                    maxLines: 1,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  _date,
+                  style: TextStyle(fontSize: 12, color: _fontColor.withOpacity(0.5)),
+                  textAlign: TextAlign.right,
+                  maxLines: 1,
+                ),
+              ],
             ),
           ),
           Expanded(

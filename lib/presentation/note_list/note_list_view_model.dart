@@ -5,6 +5,7 @@ import 'package:note/domain/interface/use_cases/note_read_use_case.dart';
 import 'package:note/domain/interface/use_cases/note_save_use_case.dart';
 import 'package:note/domain/model/note.dart';
 import 'package:note/presentation/note_list/note_list_view_state.dart';
+import 'package:intl/intl.dart';
 
 final class NoteListViewModel extends ChangeNotifier {
   final NoteReadUseCase _readUseCase;
@@ -61,5 +62,14 @@ final class NoteListViewModel extends ChangeNotifier {
 
   String previewAt(int index) {
     return _state.notes[index].content.substring(0, min(40, _state.notes[index].content.length));
+  }
+
+  String dateAt(int index) {
+    final updateDate = _state.notes[index].updateDate;
+    if (updateDate != null) {
+      return DateFormat('yy/MM/dd HH:mm').format(updateDate);
+    } else {
+      return '';
+    }
   }
 }
